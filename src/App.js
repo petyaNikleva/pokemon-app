@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+import './App.css';
+import { fetchData } from './redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+
+const App = () => {
+  const user = useSelector((state) => state.fetchDataReducer.user)
+  const dispatch = useDispatch();
+
+  const handleFetchData = () => {
+    dispatch(fetchData(2));
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div> Pokemon app </div>
+        <button onClick={handleFetchData}>Fetch</button>
+        <div>
+          {
+            user
+          }
+        </div>
       </header>
     </div>
-  );
+  )
+
 }
 
+
 export default App;
+
+
