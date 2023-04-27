@@ -1,38 +1,44 @@
 import { takeEvery, call, put } from "redux-saga/effects";
 import types from "../types";
 import axios from "axios";
-import { fetchdataSuccess, fetchdataSuccessPokemon } from "../actions";
+import { fetchdataSuccessPokemon } from "../actions";
 
-function* asyncFetchRequest(action) {
+const base = `https://pokeapi.co/api/v2/pokemon`
+const baseUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=20'
+function* fetchPokemons(action) {
   try {
-    const url = `https://reqres.in/api/users/${action.payload}`
-    const response = yield call(() => axios.get(url))
-    yield put(fetchdataSuccess(response.data.data.first_name))
+    const response = yield call(() => axios.get(baseUrl))
+    const list = [...response.data.results];
+
+    for (let index = 0; index < list.length; index++) {
+      const name = list[index].name;
+      const getSpriteData = yield call(() => axios.get(`${base}/${name}`))
+      const sprite = getSpriteData.data.sprites.front_default
+      list[index].sprite = sprite;
+    }
+    yield put(fetchdataSuccessPokemon(list))
   }
   catch (error) {
     console.log(error)
   }
 }
 
-function* asyncFetchPokemonsRequest(action) {
-  try {
-    //const url = `https://pokeapi.co/api/v2/pokemon`
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`
-
-    const response = yield call(() => axios.get(url))
-    //console.log(response.data.results)
-    yield put(fetchdataSuccessPokemon(response.data.results))
-  }
-  catch (error) {
-    console.log(error)
-  }
+export function* watchFetchPokemons() {
+  yield takeEvery(types.SEND_REQUEST_POKEMONS, fetchPokemons)
 }
 
-export function* watchFetchDataSaga() {
-  yield takeEvery(types.SEND_REQUEST, asyncFetchRequest)
-}
+// function* asyncFetchPokemonsRequest(action) {
+//   try {
+//     const url = `https://pokeapi.co/api/v2/pokemon`
+//     const response = yield call(() => axios.get(url))
+//     console.log(response.data)
+//     yield put(fetchdataSuccessPokemon(response.data.results))
+//   }
+//   catch (error) {
+//     console.log(error)
+//   }
+// }
 
-export function* watchFetchPokemonSaga() {
-  yield takeEvery(types.SEND_REQUEST_POKEMONS, asyncFetchPokemonsRequest)
-
-} 
+// export function* watchLoadPokemon() {
+//   yield takeEvery(types.SEND_REQUEST_POKEMONS, asyncFetchPokemonsRequest)
+// } 
