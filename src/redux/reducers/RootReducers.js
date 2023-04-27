@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import fetchDataReducer from './fetchDataReducer'
 
-const RootReducer = combineReducers({
+const rootReducer = combineReducers({
   fetchDataReducer
 })
 
-export default RootReducer;
+export default rootReducer;
 
