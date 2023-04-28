@@ -11,15 +11,22 @@ export const fetchdataSuccessPokemon = ({ pokemonList, count }) => {
   return {
     type: types.SEND_REQUEST_POKEMON_SUCCESS,
     payload: { pokemonList, count }
-    //payload: data.pokemons
   }
 }
 
 export const fetchDataFailure = (error) => {
   return {
-    type: types.SEND_REQUEST_FAILURE,
+    type: types.SEND_REQUEST_POKEMON_FAILURE,
     payload: {},
     error: error
+  }
+}
+
+export const getCurrentPokemon = (name) => {
+  console.log(name)
+  return {
+    type: types.GET_CURRENT_POKEMON,
+    payload: name
   }
 }
 

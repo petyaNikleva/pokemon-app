@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import Header from './components/Header';
 import Pokemons from './components/Pokemons';
-import Details from './components/Details';
+import PokemonDetailsCard from './components/PokemonDetailsCard';
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Pokemons />} />
-          <Route path="/details/:name" element={<Details />} />
+          <Route path="/details/:name" element={<PokemonDetailsCard />} />
         </Routes>
       </Router>
     </Box>

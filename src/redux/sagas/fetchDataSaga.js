@@ -4,7 +4,6 @@ import axios from "axios";
 import { fetchdataSuccessPokemon } from "../actions";
 import { pokemonsPerPage } from "../../constants";
 
-
 const baseUrl = `https://pokeapi.co/api/v2/pokemon`
 function* fetchPokemons(action) {
   const offset = Number(action.payload) * pokemonsPerPage;
@@ -30,18 +29,6 @@ export function* watchFetchPokemons() {
   yield takeEvery(types.SEND_REQUEST_POKEMONS, fetchPokemons)
 }
 
-// function* asyncFetchPokemonsRequest(action) {
-//   try {
-//     const url = `https://pokeapi.co/api/v2/pokemon`
-//     const response = yield call(() => axios.get(url))
-//     console.log(response.data)
-//     yield put(fetchdataSuccessPokemon(response.data.results))
-//   }
-//   catch (error) {
-//     console.log(error)
-//   }
-// }
 
-// export function* watchLoadPokemon() {
-//   yield takeEvery(types.SEND_REQUEST_POKEMONS, asyncFetchPokemonsRequest)
-// } 
+
+

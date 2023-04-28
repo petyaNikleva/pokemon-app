@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Details = () => {
+import { getCurrentPokemon } from '../redux/actions';
+
+const PokemonDetailsCard = () => {
   const { name } = useParams();
 
   useEffect(() => {
-    //getPokemon(name)
+    getCurrentPokemon(name)
   }, [])
 
   return (
@@ -13,4 +15,4 @@ const Details = () => {
   )
 }
 
-export default Details
+export default PokemonDetailsCard;

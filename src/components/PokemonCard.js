@@ -8,9 +8,7 @@ const PokemonCard = ({ pokemon }) => {
     e.preventDefault();
     navigate(`details/${pokemon.name}`);
   }
-  console.log(pokemon.url)
   return (
-
     <Card sx={{ maxWidth: 120 }}>
       <CardActionArea onClick={handlePokemonClick}>
         <CardMedia

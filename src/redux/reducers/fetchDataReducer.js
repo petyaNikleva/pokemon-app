@@ -23,12 +23,19 @@ const fetchDataReducer = (state = initialState, action) => {
         pokemons: action.payload.pokemonList,
         totalCountPokemons: action.payload.count
       }
-    case types.SEND_REQUEST_FAILURE:
+    case types.SEND_REQUEST_POKEMON_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.error
       }
+    case types.GET_CURRENT_POKEMON:
+      console.log('bbbb')
+      return {
+        ...state,
+        loading: true
+      }
+
     default: return {
       state
     }
