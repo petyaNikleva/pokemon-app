@@ -2,21 +2,24 @@ import { takeEvery, call, put } from "redux-saga/effects";
 import types from "../types";
 import axios from "axios";
 import { fetchdataSuccessPokemon } from "../actions";
+import { pokemonsPerPage } from "../../constants";
 
-const base = `https://pokeapi.co/api/v2/pokemon`
-const baseUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=20'
+
+const baseUrl = `https://pokeapi.co/api/v2/pokemon`
 function* fetchPokemons(action) {
+  const offset = Number(action.payload) * pokemonsPerPage;
   try {
-    const response = yield call(() => axios.get(baseUrl))
-    const list = [...response.data.results];
+    const response = yield call(() => axios.get(`${baseUrl}?offset=${offset}&limit=${pokemonsPerPage}`))
+    const pokemonList = [...response.data.results];
+    const count = response.data.count;
 
-    for (let index = 0; index < list.length; index++) {
-      const name = list[index].name;
-      const getSpriteData = yield call(() => axios.get(`${base}/${name}`))
+    for (let index = 0; index < pokemonList.length; index++) {
+      const name = pokemonList[index].name;
+      const getSpriteData = yield call(() => axios.get(`${baseUrl}/${name}`))
       const sprite = getSpriteData.data.sprites.front_default
-      list[index].sprite = sprite;
+      pokemonList[index].sprite = sprite;
     }
-    yield put(fetchdataSuccessPokemon(list))
+    yield put(fetchdataSuccessPokemon({ pokemonList, count }))
   }
   catch (error) {
     console.log(error)

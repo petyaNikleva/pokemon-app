@@ -1,16 +1,17 @@
 import types from './types';
 
-export function fetchPokemons() {
+export const fetchPokemons = (page) => {
   return {
     type: types.SEND_REQUEST_POKEMONS,
+    payload: page
   }
 }
 
-export const fetchdataSuccessPokemon = (pokemons) => {
-
+export const fetchdataSuccessPokemon = ({ pokemonList, count }) => {
   return {
     type: types.SEND_REQUEST_POKEMON_SUCCESS,
-    payload: pokemons
+    payload: { pokemonList, count }
+    //payload: data.pokemons
   }
 }
 
@@ -22,9 +23,3 @@ export const fetchDataFailure = (error) => {
   }
 }
 
-//export const fetchdataSuccess = (user) => {
-  //   return {
-  //     type: types.SEND_REQUEST_SUCCESS,
-  //     payload: user
-  //   }
-  // }

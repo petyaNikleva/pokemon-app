@@ -1,0 +1,1 @@
+export const pokemonsPerPage = 20;

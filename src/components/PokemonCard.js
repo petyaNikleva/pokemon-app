@@ -1,13 +1,18 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { CardActionArea, Typography, Card, CardMedia, CardContent } from '@mui/material';
 
 const PokemonCard = ({ pokemon }) => {
+  const navigate = useNavigate();
+
+  const handlePokemonClick = (e) => {
+    e.preventDefault();
+    navigate(`details/${pokemon.name}`);
+  }
+  console.log(pokemon.url)
   return (
+
     <Card sx={{ maxWidth: 120 }}>
-      <CardActionArea>
+      <CardActionArea onClick={handlePokemonClick}>
         <CardMedia
           component="img"
           height="120"
