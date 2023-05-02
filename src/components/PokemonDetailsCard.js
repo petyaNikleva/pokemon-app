@@ -49,15 +49,15 @@ const PokemonDetailsCard = () => {
         <CardContent sx={{ display: "flex", flexDirection: 'column', alignItems: "center" }}>
           <Typography paragraph fontSize={24}>Ablities:</Typography>
           <Typography paragraph>
-            {currentPokemon.stats.map((s =>
+            {currentPokemon.stats.map((stat =>
               <Box sx={{ display: "flex", alignItems: "center", padding: 1 }}>
                 <CardMedia
                   component="img"
                   sx={{ width: 24, margin: 1 }}
-                  image={`/images/${s.stat.name}.png`}
+                  image={`/images/${stat.stat.name}.png`}
                   alt="ability"
                 />
-                <Typography>{s.stat.name}: {s.base_stat} </Typography>
+                <Typography>{stat.stat.name}: {stat.base_stat} </Typography>
               </Box>))}
           </Typography>
         </CardContent>

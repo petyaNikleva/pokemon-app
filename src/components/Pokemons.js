@@ -11,14 +11,12 @@ const Pokemons = () => {
   const loading = useSelector((state) => state.fetchDataReducer.loading)
   const totalCountPokemons = useSelector((state) => state.fetchDataReducer.totalCountPokemons)
   const count = Math.ceil(totalCountPokemons / pokemonsPerPage);
-
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(fetchPokemons(page - 1));
   }, [dispatch, page]);
-
 
   return (
     <Box maxWidth="760px">

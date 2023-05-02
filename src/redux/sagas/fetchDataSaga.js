@@ -7,8 +7,8 @@ import { pokemonsPerPage } from "../../constants";
 const baseUrl = `https://pokeapi.co/api/v2/pokemon`;
 
 function* fetchPokemons(action) {
-  const offset = Number(action.payload) * pokemonsPerPage;
   try {
+    const offset = Number(action.payload) * pokemonsPerPage;
     const response = yield call(() => axios.get(`${baseUrl}?offset=${offset}&limit=${pokemonsPerPage}`))
     const pokemonList = [...response.data.results];
     const count = response.data.count;

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { CardActionArea, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const PokemonCard = ({ pokemon }) => {
   const navigate = useNavigate();
@@ -26,6 +27,10 @@ const PokemonCard = ({ pokemon }) => {
 
     </Card>
   );
+}
+
+ToDoTableRow.propTypes = {
+  pokemon: PropTypes.object.isRequired
 }
 
 export default PokemonCard;
