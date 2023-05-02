@@ -23,10 +23,17 @@ export const fetchDataFailure = (error) => {
 }
 
 export const getCurrentPokemon = (name) => {
-  console.log(name)
   return {
     type: types.GET_CURRENT_POKEMON,
     payload: name
   }
 }
+
+export const getCurrentPokemonSuccess = (currentPokemon) => {
+  return {
+    type: types.GET_CURRENT_POKEMON_SUCCESS,
+    payload: currentPokemon
+  }
+}
+
 

@@ -22,7 +22,7 @@ const Pokemons = () => {
 
   return (
     <Box maxWidth="760px">
-      {loading && <Typography>Loading</Typography>}
+      {loading && <Typography>Loading...</Typography>}
       {
         pokemons?.length > 0 && (
           <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "12px" }}>

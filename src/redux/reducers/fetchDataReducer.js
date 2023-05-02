@@ -4,7 +4,8 @@ const initialState = {
   pokemons: [],
   loading: false,
   error: {},
-  totalCountPokemons: 0
+  totalCountPokemons: 0,
+  currentPokemon: null
 }
 
 const fetchDataReducer = (state = initialState, action) => {
@@ -13,7 +14,8 @@ const fetchDataReducer = (state = initialState, action) => {
     case types.SEND_REQUEST_POKEMONS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        pokemons: [],
       }
     case types.SEND_REQUEST_POKEMON_SUCCESS:
       return {
@@ -30,10 +32,16 @@ const fetchDataReducer = (state = initialState, action) => {
         error: action.error
       }
     case types.GET_CURRENT_POKEMON:
-      console.log('bbbb')
       return {
         ...state,
         loading: true
+      }
+    case types.GET_CURRENT_POKEMON_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: {},
+        currentPokemon: action.payload
       }
 
     default: return {

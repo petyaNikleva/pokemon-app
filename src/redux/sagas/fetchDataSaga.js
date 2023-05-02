@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from "redux-saga/effects";
 import types from "../types";
 import axios from "axios";
-import { fetchdataSuccessPokemon } from "../actions";
+import { fetchdataSuccessPokemon, getCurrentPokemonSuccess } from "../actions";
 import { pokemonsPerPage } from "../../constants";
 
 const baseUrl = `https://pokeapi.co/api/v2/pokemon`;
@@ -31,22 +31,11 @@ export function* watchFetchPokemons() {
 }
 
 function* getCurrentPokemon(action) {
-  console.log(action)
   const name = action.payload;
-  console.log('name', name)
   try {
     const response = yield call(() => axios.get(`${baseUrl}/${name}`))
-    console.log('responce', response)
-    //const currentPokemon = [...response.data.results];
-
-
-    // for (let index = 0; index < pokemonList.length; index++) {
-    //   const name = pokemonList[index].name;
-    //   const getSpriteData = yield call(() => axios.get(`${baseUrl}/${name}`))
-    //   const sprite = getSpriteData.data.sprites.front_default
-    //   pokemonList[index].sprite = sprite;
-    // }
-    // yield put(fetchdataSuccessPokemon({ pokemonList, count }))
+    const currentPokemon = response.data;
+    yield put(getCurrentPokemonSuccess(currentPokemon))
   }
   catch (error) {
     console.log(error)
