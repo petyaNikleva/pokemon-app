@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Box } from '@mui/material';
+import Header from './components/Header';
+import Pokemons from './components/Pokemons';
+import PokemonDetailsCard from './components/PokemonDetailsCard';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Pokemons />} />
+          <Route path="/details/:name" element={<PokemonDetailsCard />} />
+        </Routes>
+      </Router>
+    </Box>
+  )
 }
 
 export default App;
+
