@@ -3,7 +3,7 @@ import types from "../types";
 const initialState = {
   pokemons: [],
   loading: false,
-  error: {},
+  error: null,
   totalCountPokemons: 0,
   currentPokemon: null
 }
@@ -21,7 +21,7 @@ const fetchDataReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: {},
+        error: null,
         pokemons: action.payload.pokemonList,
         totalCountPokemons: action.payload.count
       }
@@ -40,7 +40,7 @@ const fetchDataReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: {},
+        error: null,
         currentPokemon: action.payload
       }
 

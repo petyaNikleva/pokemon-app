@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { CardActionArea, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import PropTypes from 'prop-types';
 
-const PokemonCard = ({ pokemon }) => {
+const PokemonSmallCard = ({ pokemon }) => {
   const navigate = useNavigate();
 
   const handlePokemonClick = (e) => {
@@ -24,13 +24,12 @@ const PokemonCard = ({ pokemon }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-
     </Card>
   );
 }
 
-ToDoTableRow.propTypes = {
+PokemonSmallCard.propTypes = {
   pokemon: PropTypes.object.isRequired
 }
 
-export default PokemonCard;
+export default PokemonSmallCard;

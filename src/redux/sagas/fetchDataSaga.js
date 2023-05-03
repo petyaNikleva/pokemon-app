@@ -1,10 +1,8 @@
-import { takeEvery, call, put } from "redux-saga/effects";
+import { takeEvery, call, put, takeLatest } from "redux-saga/effects";
 import types from "../types";
 import axios from "axios";
-import { fetchdataSuccessPokemon, getCurrentPokemonSuccess } from "../actions";
-import { pokemonsPerPage } from "../../constants";
-
-const baseUrl = `https://pokeapi.co/api/v2/pokemon`;
+import { fetchDataFailure, fetchdataSuccessPokemon, getCurrentPokemonSuccess } from "../actions";
+import { baseUrl, pokemonsPerPage } from "../../constants";
 
 function* fetchPokemons(action) {
   try {
@@ -22,12 +20,13 @@ function* fetchPokemons(action) {
     yield put(fetchdataSuccessPokemon({ pokemonList, count }))
   }
   catch (error) {
+    yield put(fetchDataFailure(error))
     console.log(error)
   }
 }
 
 export function* watchFetchPokemons() {
-  yield takeEvery(types.SEND_REQUEST_POKEMONS, fetchPokemons)
+  yield takeLatest(types.SEND_REQUEST_POKEMONS, fetchPokemons)
 }
 
 function* getCurrentPokemon(action) {
@@ -38,6 +37,7 @@ function* getCurrentPokemon(action) {
     yield put(getCurrentPokemonSuccess(currentPokemon))
   }
   catch (error) {
+    yield put(fetchDataFailure(error))
     console.log(error)
   }
 }
